@@ -1,4 +1,6 @@
 var timeDisplayEl = $('#time-display');
+// var currentCov19CasesEl = $('#"currentCov19Cases"');
+// var currentVaccineDistributedEl = $('#currentVaccineDistributed');
 var searchFormEl = document.querySelector('#search-form');
 var submitFormEl = document.querySelector('#submit-form');
 
