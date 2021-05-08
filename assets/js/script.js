@@ -17,7 +17,7 @@ setInterval(displayTime, 1000);
 
 function init() {
 
-var ip=  fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
+var ip=fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
 
 
 fetch("http://api.ipapi.com/" + ip + "?access_key=eee64595bb8ff68b058ee670d467d2e3")
