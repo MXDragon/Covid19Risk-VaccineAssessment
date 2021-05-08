@@ -1,8 +1,16 @@
 h1,
 h2 {
-    text-align: center;
+	text-align: center;
 }
 
 #search-form {
-    text-align: center;
+	text-align: center;
+}
+
+#search-form {
+	margin-top: 30px;
+}
+.box {
+	border: 2px solid hsl(171, 100%, 96%);
+	border-radius: 8px;
 }
