@@ -1,16 +1,17 @@
 var timeDisplayEl = $('#time-display');
-// var currentCov19CasesEl = $('#"currentCov19Cases"');
+var currentCov19CasesEl = $('#"currentCov19Cases"');
 // var currentVaccineDistributedEl = $('#currentVaccineDistributed');
 var searchFormEl = document.querySelector('#search-form');
 var submitFormEl = document.querySelector('#submit-form');
+var searchButton = document.querySelector('#search-button');
 
 // handle displaying the time
 function displayTime() {
-    // The way we want the date to look
-    // To add text add brackets
-    // momentjs.com 
-    var rightNow = moment().format('MMM DD, YYYY [at] hh:mm:ss a');
-    timeDisplayEl.text(rightNow);
-  }
+  // The way we want the date to look
+  // To add text add brackets
+  // momentjs.com 
+  var rightNow = moment().format('MMM DD, YYYY [at] hh:mm:ss a');
+  timeDisplayEl.text(rightNow);
+}
 
   setInterval(displayTime, 1000);
