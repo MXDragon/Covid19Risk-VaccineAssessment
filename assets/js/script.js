@@ -30,3 +30,8 @@ fetch("http://api.ipapi.com/" + ip + "?access_key=eee64595bb8ff68b058ee670d467d2
   });
 }
 init()
+
+
+document.querySelector("#search-form").addEventListener("submit", function(event) {
+event.preventDefault();
+});
