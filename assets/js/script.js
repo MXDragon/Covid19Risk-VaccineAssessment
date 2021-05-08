@@ -1,5 +1,5 @@
 var timeDisplayEl = $('#time-display');
-// var getCovidData = $('#getCovidData');
+// var getCovidDataEl = $('#getCovidData');
 // var getVaccineData = $('#getVaccineData');
 var searchFormEl = document.querySelector('#search-form');
 var covidGlobalEl = document.querySelector('#covid-global');
@@ -17,10 +17,20 @@ function displayTime() {
 setInterval(displayTime, 1000);
 
 function getCovidData() {
-  var results = fetch("https://api.covid19api.com/summary")
+  var dataCounter = fetch("https://api.covid19api.com/summary")
   // console.log(results)
   .then(response => response.json())
   .then(summary => showSummary(summary.results));
+}
+
+var showSummary = summary => {
+  const summaryDiv = document.querySelector('#getcoviddata');
+  summary.forEach(summary => {
+    const summaryElement = document.createElement('p');
+    summaryElement.innerText = 
+  })
+}
+
 }
 
 getCovidData();
