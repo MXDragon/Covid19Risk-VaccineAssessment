@@ -1,10 +1,35 @@
 var timeDisplayEl = $('#time-display');
-// var currentCov19CasesEl = $('#"currentCov19Cases"');
+// var covidData = document.querySelector('span');
+var requestUrl = 'https://api.covid19api.com/summary';
 // var currentVaccineDistributedEl = $('#currentVaccineDistributed');
 var searchFormEl = document.querySelector('#search-form');
 
 var submitFormEl = document.querySelector('#submit-form');
 var globalIP ="";
+
+// displays data from Covid-19 API in console
+fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    appendData(data);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+
+  function appendData(data) {
+  var getCovidData = document.getElementById('get-covid-data');
+    for (var i = 0; i < data.length; i++) {
+      var div = document.createElement("div");
+      div.innerHTML = data[i].totalConfirmed + ' '
+      getCovidData.appendChild(div);
+    }
+  }
+
 // handle displaying the time
 function displayTime() {
   // The way we want the date to look
