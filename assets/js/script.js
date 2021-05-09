@@ -6,29 +6,58 @@ var searchFormEl = document.querySelector('#search-form');
 
 var submitFormEl = document.querySelector('#submit-form');
 var globalIP ="";
+var GlobalConfirmed =""
 
-// displays data from Covid-19 API in console
-fetch(requestUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    // console.log('Fetch Response \n-------------');
-    console.log(data);
-    appendData(data);
-  })
-  .catch(function (err) {
-    console.log('error: ' + err);
-  });
+function getCovidData(){
+  // displays data from Covid-19 API in console
+//different search lines in comment here
+//'https://api.covid19api.com/total/dayone/country/' + globalCountry + '/status/confirmed'
+//'https://api.covid19api.com/live/country/' + globalCountry + '/status/confirmed'
+//
 
-  function appendData(data) {
-  var getCovidData = document.getElementById('get-covid-data');
-    for (var i = 0; i < data.length; i++) {
-      var div = document.createElement("div");
-      div.innerHTML = data[i].totalConfirmed + ' '
-      getCovidData.appendChild(div);
-    }
-  }
+
+  fetch('https://api.covid19api.com/live/country/' + globalCountry + '/status/confirmed')
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // console.log('Fetch Response \n-------------');
+      console.log(data);
+      console.log(data[0].Confirmed);
+      //Are doing stuff with the data here. So.
+      var TEMPcovidGlobalConfirmed=data[0].Confirmed;
+      covidGlobalConfirmed.text(TEMPcovidGlobalConfirmed);
+  
+      //appendData(data);
+    })
+    .catch(function (err) {
+      console.log('error: ' + err);
+    });
+}
+
+
+// // displays data from Covid-19 API in console
+// fetch(requestUrl)
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     // console.log('Fetch Response \n-------------');
+//     console.log(data);
+//     appendData(data);
+//   })
+//   .catch(function (err) {
+//     console.log('error: ' + err);
+//   });
+
+  // function appendData(data) {
+  // var getCovidData = document.getElementById('get-covid-data');
+  //   for (var i = 0; i < data.length; i++) {
+  //     var div = document.createElement("div");
+  //     div.innerHTML = data[i].totalConfirmed + ' '
+  //     getCovidData.appendChild(div);
+  //   }
+  
 
 // handle displaying the time
 function displayTime() {
@@ -51,16 +80,25 @@ function init() {
 
   let apiKey = '9692d1c3f5905c16f6c3847aabe964849cafe1836e79a8d817edcd25';
   json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
-    globalIP = data.ip;
+    console.log(data)
+    globalIP = data.ip
+    var TEMPCountryName = data.country_name;
+    //Converting country name so Covid will accept it, replace spaces with dashes and lower case
+    TEMPCountryName = TEMPCountryName.replace(/\s+/g, '-');
+    globalCountry = TEMPCountryName.toLowerCase();
+    console.log("globalCountry: " + globalCountry);
+
+    //Now we can call the Covid protocol using this information
+    getCovidData();
+    //str = str.replace(/\s+/g, '-');
     // console.log("Global IP: " +globalIP);
     // console.log(data.ip);
     // console.log(data.city);
     // console.log(data.country_code);
+    
     // so many more properties
     return;
 });
-
-
 }
 
 init()
@@ -69,5 +107,3 @@ init()
 document.querySelector("#search-form").addEventListener("submit", function(event) {
 event.preventDefault();
 });
-
-
