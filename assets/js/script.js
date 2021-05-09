@@ -18,7 +18,7 @@ setInterval(displayTime, 1000);
 
 function init() {
 
-  var getIP=  fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
+  //var getIP=  fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
 
   function json(url) {
   return fetch(url).then(res => res.json());
