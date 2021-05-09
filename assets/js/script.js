@@ -7,6 +7,28 @@ var searchFormEl = document.querySelector('#search-form');
 var submitFormEl = document.querySelector('#submit-form');
 var globalIP ="";
 
+function getCovidData(){
+  // displays data from Covid-19 API in console
+  fetch('https://api.covid19api.com/live/country/' + globalCountry + '/status/confirmed')
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // console.log('Fetch Response \n-------------');
+      console.log(data);
+      console.log(data[0].Confirmed);
+      //Are doing stuff with the data here. So.
+      var TEMPcovidGlobalConfirmed=data[0].Confirmed;
+      covidGlobalConfirmed.text(TEMPcovidGlobalConfirmed);
+  
+      //appendData(data);
+    })
+    .catch(function (err) {
+      console.log('error: ' + err);
+    });
+  }
+
+
 // displays data from Covid-19 API in console
 fetch(requestUrl)
   .then(function (response) {
@@ -69,5 +91,3 @@ init()
 document.querySelector("#search-form").addEventListener("submit", function(event) {
 event.preventDefault();
 });
-
-
