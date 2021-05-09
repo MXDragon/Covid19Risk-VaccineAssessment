@@ -15,13 +15,14 @@
 <body>
 
      
-
+  <div class="box mt-6 mr-6 ml-6 mb-6 pb-6 has-background-primary-light ">
 <section class="hero column is-medium is-info is-mobile is-centered">
     <div class="hero-body">
       <p class="title">
         Map
         <!-- Code for MapBox -->
-    <div id='map' style='width: 1920px; height: 1080px;'></div>
+    <div id='map' class="is-centered" style='width: 1920px; height: 1080px;'></div>
+    
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmVudHpicnkiLCJhIjoiY2tvZ2o5cm5iMGZrcTJvbngwZnpzYW9yMyJ9.lFzRDHzMnkWAhcUuY-6POw';
     var map = new mapboxgl.Map({
@@ -36,6 +37,7 @@
       </p>
     </div>
   </section>
+</div>
 
 
 

@@ -30,6 +30,20 @@ fetch(requestUrl)
     }
   }
 
+  //GETS VACCINE OBJECT INFORMATION
+  fetch("https://covid-api.mmediagroup.fr/v1/vaccines")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    appendData(data);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+
 // handle displaying the time
 function displayTime() {
   // The way we want the date to look
