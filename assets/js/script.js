@@ -30,7 +30,7 @@ function getVaccineData(){
 }
 
 
-function getCovidData(){
+function covidData(){
   // displays data from Covid-19 API in console
 //different search lines in comment here
 //'https://api.covid19api.com/total/dayone/country/' + globalCountry + '/status/confirmed'
@@ -49,6 +49,7 @@ function getCovidData(){
       //Are doing stuff with the data here. So.
       var TEMPcovidGlobalConfirmed=data[0].Confirmed;
       covidGlobalConfirmed.text(TEMPcovidGlobalConfirmed);
+      return covidGlobalConfirmed.json();
   
       //appendData(data);
     })
@@ -57,28 +58,30 @@ function getCovidData(){
     });
 }
 
+// displays data from Covid-19 API in console
+// function globalCovidData () {
+fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    appendData(data);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
 
-// // displays data from Covid-19 API in console
-// fetch(requestUrl)
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     // console.log('Fetch Response \n-------------');
-//     console.log(data);
-//     appendData(data);
-//   })
-//   .catch(function (err) {
-//     console.log('error: ' + err);
-//   });
+// globalCovidData = document.querySelector('#get-covid-data');
 
-  // function appendData(data) {
-  // var getCovidData = document.getElementById('get-covid-data');
-  //   for (var i = 0; i < data.length; i++) {
-  //     var div = document.createElement("div");
-  //     div.innerHTML = data[i].totalConfirmed + ' '
-  //     getCovidData.appendChild(div);
-  //   }
+  function appendData(data) {
+    // covidGlobalConfirmed = document.querySelector('#get-covid-data');
+    for (var i = 0; i < data.length; i++) {
+      var div = document.createElement("div");
+      div.innerHTML = data[i].totalConfirmed + ' '
+      covidData.appendChild(div);
+    }
   
 
 // handle displaying the time
@@ -120,7 +123,7 @@ function init() {
     console.log("globalCountry: " + globalCountry);
 
     //Now we can call the Covid protocol using this information
-    getCovidData();
+    covidData();
     //str = str.replace(/\s+/g, '-');
     // console.log("Global IP: " +globalIP);
     // console.log(data.ip);
@@ -133,9 +136,15 @@ function init() {
 });
 }
 
-init()
+init();
+
+  }
+
+  // }}
+  
 
 
-document.querySelector("#search-form").addEventListener("submit", function(event) {
-event.preventDefault();
-});
+
+
+// document.querySelector("#search-form").addEventListener("submit", function(event) {
+// event.preventDefault();
