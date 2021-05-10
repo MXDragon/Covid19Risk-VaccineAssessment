@@ -28,35 +28,55 @@ function getVaccineData(){
   console.log('error: ' + err);
 });
 }
+
 function getCovidGlobal(){
+  fetch(requestUrl)
+  .then(function (response) {
+   return response.json();
+ })
+ .then(function (data) {
+   // console.log('Fetch Response \n-------------');
+   console.log(data);
+   
+   //Are doing stuff with the data here. So. Getting Global Vax data.
+   globalConfirmedCovid = data.TotalConfirmed;
+   console.log(globalConfirmedCovid);
+ 
+  })
+ .catch(function (err) {
+   console.log('error: ' + err);
+ });
+ }
+
+ getCovidGlobal();
 
 // displays data from Covid-19 API in console
 // function globalCovidData () {
-  fetch(requestUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
+  // fetch(requestUrl)
+  // .then(function (response) {
+  //   return response.json();
+  // })
+  // .then(function (data) {
     // console.log('Fetch Response \n-------------');
-    console.log(data);
-    appendData(data);
-  })
-  .catch(function (err) {
-    console.log('error: ' + err);
-  });
+  //   console.log(data);
+  //   appendData(data);
+  // })
+  // .catch(function (err) {
+  //   console.log('error: ' + err);
+  // });
 
 // globalCovidData = document.querySelector('#get-covid-data');
 
-  function appendData(data) {
+  // function appendData(data) {
     // covidGlobalConfirmed = document.querySelector('#get-covid-data');
-    for (var i = 0; i < data.length; i++) {
-      var div = document.createElement("div");
-      div.innerHTML = data[i].totalConfirmed + ' '
-      covidData.appendChild(div);
-    }
+    // for (var i = 0; i < data.length; i++) {
+    //   var div = document.createElement("div");
+    //   div.innerHTML = data[i].totalConfirmed + ' '
+    //   covidData.appendChild(div);
+    // }
   
 
-}
+
 
 function getGeoIP(){
   
@@ -133,6 +153,8 @@ function init() {
 
     //Now we can call the Covid protocol using this information
     covidData();
+    return;
+});
     //str = str.replace(/\s+/g, '-');
     // console.log("Global IP: " +globalIP);
     // console.log(data.ip);
@@ -142,12 +164,11 @@ function init() {
     // so many more properties
     getVaccineData();
     return;
-});
-}
+};
 
 init();
 
-  }
+  
 
   // }}
   
