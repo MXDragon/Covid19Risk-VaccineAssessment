@@ -4,6 +4,7 @@ var timeDisplayEl = $('#time-display');
 var searchFormEl = document.querySelector('#search-form');
 
 var submitFormEl = document.querySelector('#submit-form');
+var globalIP ="";
 // handle displaying the time
 function displayTime() {
   // The way we want the date to look
@@ -17,16 +18,31 @@ setInterval(displayTime, 1000);
 
 function init() {
 
-var ip=fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
+  var getIP=  fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
+
+  function json(url) {
+  return fetch(url).then(res => res.json());
+  }
+
+  let apiKey = '9692d1c3f5905c16f6c3847aabe964849cafe1836e79a8d817edcd25';
+  json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+    globalIP = data.ip;
+    // console.log("Global IP: " +globalIP);
+    // console.log(data.ip);
+    // console.log(data.city);
+    // console.log(data.country_code);
+    // so many more properties
+    return;
+});
 
 
-fetch("http://api.ipapi.com/" + ip + "?access_key=eee64595bb8ff68b058ee670d467d2e3")
-
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-  });
 }
+
 init()
+
+
+document.querySelector("#search-form").addEventListener("submit", function(event) {
+event.preventDefault();
+});
+
+
