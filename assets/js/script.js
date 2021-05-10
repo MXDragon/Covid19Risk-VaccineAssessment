@@ -8,8 +8,10 @@ var submitFormEl = document.querySelector('#submit-form');
 var country4Vax = "";
 var globalIP ="";
 var globalConfirmedVax =""
+var globalCountry = ""
 
 function getVaccineData(){
+  console.log(country4Vax);
  fetch( 'https://covid-api.mmediagroup.fr/v1/vaccines?country=' + country4Vax )
  .then(function (response) {
   return response.json();
@@ -28,6 +30,7 @@ function getVaccineData(){
   console.log('error: ' + err);
 });
 }
+
 function getCovidGlobal(){
 
 // displays data from Covid-19 API in console
@@ -44,7 +47,7 @@ function getCovidGlobal(){
   .catch(function (err) {
     console.log('error: ' + err);
   });
-
+}
 // globalCovidData = document.querySelector('#get-covid-data');
 
   function appendData(data) {
@@ -55,13 +58,8 @@ function getCovidGlobal(){
       covidData.appendChild(div);
     }
   
-
-}
-
-function getGeoIP(){
   
 }
-
 
 function covidData(){
   // displays data from Covid-19 API in console
@@ -107,30 +105,7 @@ setInterval(displayTime, 1000);
 function init() {
 
   //var getIP=  fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
-
-  function json(url) {
-  return fetch(url).then(res => res.json());
-  }
-
-  let apiKey = '9692d1c3f5905c16f6c3847aabe964849cafe1836e79a8d817edcd25';
-  json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
-    console.log(data)
-
-    globalIP = data.ip
-
-    //will use country4Vax in the Vaccine call
-    country4Vax = data.country_name;
-
-    //Getting Covid Data for country
-    //Converting country name so Covid will accept it, replace spaces with dashes and lower case
-    var TEMPCountryName = data.country_name;
-    
-    
-
-    TEMPCountryName = TEMPCountryName.replace(/\s+/g, '-');
-    globalCountry = TEMPCountryName.toLowerCase();
-    console.log("globalCountry: " + globalCountry);
-
+    getGeoIP();
     //Now we can call the Covid protocol using this information
     covidData();
     //str = str.replace(/\s+/g, '-');
@@ -142,18 +117,35 @@ function init() {
     // so many more properties
     getVaccineData();
     return;
-});
+}
+
+
+function getGeoIP(){
+  
+  function json(url) {
+    return fetch(url).then(res => res.json());
+    }
+  
+    let apiKey = '9692d1c3f5905c16f6c3847aabe964849cafe1836e79a8d817edcd25';
+    json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+      console.log(data)
+  
+      globalIP = data.ip
+  
+      //will use country4Vax in the Vaccine call
+      country4Vax = data.country_name;
+  
+      //Getting Covid Data for country
+      //Converting country name so Covid will accept it, replace spaces with dashes and lower case
+      var TEMPCountryName = data.country_name;
+      
+      
+  
+      TEMPCountryName = TEMPCountryName.replace(/\s+/g, '-');
+      globalCountry = TEMPCountryName.toLowerCase();
+      console.log("globalCountry: " + globalCountry);
+    }
+);
 }
 
 init();
-
-  }
-
-  // }}
-  
-
-
-
-
-// document.querySelector("#search-form").addEventListener("submit", function(event) {
-// event.preventDefault();
