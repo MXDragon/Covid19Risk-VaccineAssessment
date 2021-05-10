@@ -1,14 +1,23 @@
-h1,
+h1 {
+	text-align: center;
+	font-weight: bold;
+}
 h2 {
-	text-align: center;
+	text-align: left;
+	font-weight: bold;
 }
-
-#search-form {
-	text-align: center;
+.header-custom {
+	background-image: url('../images/covid1.png');
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: 100%;
 }
-
 #search-form {
 	margin-top: 30px;
+	text-align: center;
 }
 .box {
 	border: 2px solid hsl(171, 100%, 96%);
