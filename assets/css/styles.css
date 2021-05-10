@@ -1,14 +1,13 @@
-h1,
-h2 {
+h1 {
 	text-align: center;
 }
-
-#search-form {
-	text-align: center;
+h2 {
+	text-align: left;
 }
 
 #search-form {
 	margin-top: 30px;
+	text-align: center;
 }
 .box {
 	border: 2px solid hsl(171, 100%, 96%);

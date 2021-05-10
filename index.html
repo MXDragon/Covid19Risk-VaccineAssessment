@@ -11,21 +11,20 @@
 
 <body>
   <header>
-    <section class="hero is-small is-primary has-text-black">
-      <div class="hero-body">
-        <h1>Current Global COVID-19 Cases:<span id="get-covid-data"></span> </h1>
-        <h1>Current Global Vaccinations Distributed:<span id="currentVaccineDistributed"></span> </h1>
-        <aside>
-          <h2>Current Time &amp; Date: <br/> <span id="time-display"></span></h2>
-        </aside>
+    <section class="hero is-medium is-primary has-text-black">
+      <h2>Current Time &amp; Date: <br/> <span id="time-display"></span></h2>
+      <div class="hero-body content is-large">
+        <h1>Current Global COVID-19 Cases:<span id="get-covid-data"></span></h1>
+        <h1>Current Global Vaccinations Distributed:<span id="currentVaccineDistributed"></span></h1>
       </div>
+    </section>
   </header>
   <!-- Created a form element to add #search-form  -->
   <div class="box mt-6 mr-6 ml-6 mb-6 pb-6 has-background-primary-light ">
   <form id="search-form">
     <!-- Added #search-input for JS  -->
-    <div id="search-input" class="countrySelect select is-primary">
-      <select>
+    <div id="search-input" class="countrySelect select is-primary ">
+      <select class="has-background-grey-light">
         <option value="select-country">Select Country</option>
         <option value="Afghanistan">Afghanistan</option>
         <option value="Albania">Albania</option>
@@ -223,7 +222,7 @@
         <option value="Zambia">Zambia</option>
         <option value="Zimbabwe">Zimbabwe</option>
       </select>
-      <button class="btn btn-info btn-block mt-4">Search</button>
+      <button class="btn btn-info btn-block button is-rounded  mt-2 is-fullwidth has-background-grey-light">Search</button>
     </div>
     </form>
     </div>
