@@ -5,8 +5,30 @@ var requestUrl = 'https://api.covid19api.com/summary';
 var searchFormEl = document.querySelector('#search-form');
 
 var submitFormEl = document.querySelector('#submit-form');
+var country4Vax = "";
 var globalIP ="";
-var GlobalConfirmed =""
+var globalConfirmedVax =""
+
+function getVaccineData(){
+ fetch( 'https://covid-api.mmediagroup.fr/v1/vaccines?country=' + country4Vax )
+ .then(function (response) {
+  return response.json();
+})
+.then(function (data) {
+  // console.log('Fetch Response \n-------------');
+  console.log(data);
+  
+  //Are doing stuff with the data here. So. Getting Global Vax data.
+  globalConfirmedVax = data.All.administered;
+  console.log(globalConfirmedVax);
+
+  
+})
+.catch(function (err) {
+  console.log('error: ' + err);
+});
+}
+
 
 function getCovidData(){
   // displays data from Covid-19 API in console
@@ -81,9 +103,18 @@ function init() {
   let apiKey = '9692d1c3f5905c16f6c3847aabe964849cafe1836e79a8d817edcd25';
   json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     console.log(data)
+
     globalIP = data.ip
-    var TEMPCountryName = data.country_name;
+
+    //will use country4Vax in the Vaccine call
+    country4Vax = data.country_name;
+
+    //Getting Covid Data for country
     //Converting country name so Covid will accept it, replace spaces with dashes and lower case
+    var TEMPCountryName = data.country_name;
+    
+    
+
     TEMPCountryName = TEMPCountryName.replace(/\s+/g, '-');
     globalCountry = TEMPCountryName.toLowerCase();
     console.log("globalCountry: " + globalCountry);
@@ -97,6 +128,7 @@ function init() {
     // console.log(data.country_code);
     
     // so many more properties
+    getVaccineData();
     return;
 });
 }
