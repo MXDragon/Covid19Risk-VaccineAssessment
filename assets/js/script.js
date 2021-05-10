@@ -28,6 +28,39 @@ function getVaccineData(){
   console.log('error: ' + err);
 });
 }
+function getCovidGlobal(){
+
+// displays data from Covid-19 API in console
+// function globalCovidData () {
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    appendData(data);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+
+// globalCovidData = document.querySelector('#get-covid-data');
+
+  function appendData(data) {
+    // covidGlobalConfirmed = document.querySelector('#get-covid-data');
+    for (var i = 0; i < data.length; i++) {
+      var div = document.createElement("div");
+      div.innerHTML = data[i].totalConfirmed + ' '
+      covidData.appendChild(div);
+    }
+  
+
+}
+
+function getGeoIP(){
+  
+}
 
 
 function covidData(){
@@ -58,31 +91,6 @@ function covidData(){
     });
 }
 
-// displays data from Covid-19 API in console
-// function globalCovidData () {
-fetch(requestUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    // console.log('Fetch Response \n-------------');
-    console.log(data);
-    appendData(data);
-  })
-  .catch(function (err) {
-    console.log('error: ' + err);
-  });
-
-// globalCovidData = document.querySelector('#get-covid-data');
-
-  function appendData(data) {
-    // covidGlobalConfirmed = document.querySelector('#get-covid-data');
-    for (var i = 0; i < data.length; i++) {
-      var div = document.createElement("div");
-      div.innerHTML = data[i].totalConfirmed + ' '
-      covidData.appendChild(div);
-    }
-  
 
 // handle displaying the time
 function displayTime() {
@@ -92,6 +100,7 @@ function displayTime() {
   var rightNow = moment().format('MMM DD, YYYY [at] hh:mm:ss a');
   timeDisplayEl.text(rightNow);
 }
+
 
 setInterval(displayTime, 1000);
 
