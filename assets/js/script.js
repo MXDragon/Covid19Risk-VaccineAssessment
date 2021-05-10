@@ -24,7 +24,6 @@ function covidData(){
       // console.log('Fetch Response \n-------------');
       console.log(data);
       console.log(data[0].Confirmed);
-      // var covidGlobalConfirmed = 
       //Are doing stuff with the data here. So.
       var TEMPcovidGlobalConfirmed=data[0].Confirmed;
       covidGlobalConfirmed.text(TEMPcovidGlobalConfirmed);
@@ -37,8 +36,8 @@ function covidData(){
     });
 }
 
-
 // displays data from Covid-19 API in console
+// function globalCovidData () {
 fetch(requestUrl)
   .then(function (response) {
     return response.json();
@@ -52,8 +51,10 @@ fetch(requestUrl)
     console.log('error: ' + err);
   });
 
+// globalCovidData = document.querySelector('#get-covid-data');
+
   function appendData(data) {
-  var getCovidData = document.getElementById('get-covid-data');
+    // covidGlobalConfirmed = document.querySelector('#get-covid-data');
     for (var i = 0; i < data.length; i++) {
       var div = document.createElement("div");
       div.innerHTML = data[i].totalConfirmed + ' '
@@ -106,6 +107,8 @@ function init() {
 init();
 
   }
+
+  // }}
   
 
 
