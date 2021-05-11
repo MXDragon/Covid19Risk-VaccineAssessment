@@ -127,12 +127,20 @@ function displayTime() {
   // momentjs.com 
   var rightNow = moment().format('MMM DD, YYYY [at] hh:mm:ss a');
   timeDisplayEl.text(rightNow);
-}
 
+// <<<<<<< Map_Feature_cont
 //helper class for displayTime
 setInterval(displayTime, 1000);
 
 //logic we call when we load the page. We can use logic calls elsewhere like buttons and dropdowns.
+// =======
+}
+
+setInterval(displayTime, 1000);
+
+
+
+// >>>>>>> main
 function init() {
 
 //var getIP=  fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
