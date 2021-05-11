@@ -55,8 +55,10 @@ function getCovidGlobal(){
     newRecovered = data.Global.NewRecovered;
     globalConfirmedCovid = data.Global.TotalConfirmed;
     console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
     // calling the displayCovidGlobal function
     displayCovidGlobal(globalConfirmedCovid);
+    // displayCovidGlobal(newConfirmed);
   })
   .catch(function (err) {
     console.log('error: ' + err);
@@ -66,10 +68,160 @@ function getCovidGlobal(){
  // displaying covid data
 function displayCovidGlobal(confirmedCases) {
 var covidGlobalConfirmed1 = document.querySelector('#get-covid-data');
+// var covidNewConfirmed = document.querySelector('#get-new-covid-data');
+// covidNewConfirmed.append(confirmedCases);
 covidGlobalConfirmed1.append(confirmedCases);
 }
 
 getCovidGlobal();
+
+function getNewConfirmed(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    //Are doing stuff with the data here. So. Getting Global Vax data.
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    // calling the displayCovidGlobal function
+    displayNewConfirmed(newConfirmed);
+    // displayCovidGlobal(newConfirmed);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+
+ // displaying covid data
+function displayNewConfirmed(newConfirmedCases) {
+var covidNewConfirmed = document.querySelector('#get-new-covid-data');
+// var covidNewConfirmed = document.querySelector('#get-new-covid-data');
+// covidNewConfirmed.append(confirmedCases);
+covidNewConfirmed.append(newConfirmedCases);
+}
+
+getNewConfirmed();
+
+function getNewDeaths(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    //Are doing stuff with the data here. So. Getting Global Vax data.
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    console.log(newDeaths);
+    // calling the displayCovidGlobal function
+    displayNewDeaths(newDeaths);
+    // displayCovidGlobal(newConfirmed);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+
+ // displaying covid data
+function displayNewDeaths(newConfirmedDeaths) {
+var covidNewDeaths = document.querySelector('#get-covid-death-data');
+// var covidNewConfirmed = document.querySelector('#get-new-covid-data');
+// covidNewConfirmed.append(confirmedCases);
+covidNewDeaths.append(newConfirmedDeaths);
+}
+
+getNewDeaths();
+
+function getTotalDeaths(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    //Are doing stuff with the data here. So. Getting Global Vax data.
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    console.log(newDeaths);
+    console.log(totalDeaths);
+    // calling the displayCovidGlobal function
+    displayTotalDeaths(totalDeaths);
+    // displayCovidGlobal(newConfirmed);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+
+ // displaying covid data
+function displayTotalDeaths(totalGlobalDeaths) {
+var covidTotalDeaths = document.querySelector('#get-global-death-data');
+// var covidNewConfirmed = document.querySelector('#get-new-covid-data');
+// covidNewConfirmed.append(confirmedCases);
+covidTotalDeaths.append(totalGlobalDeaths);
+}
+
+getTotalDeaths();
+
+function getTotalRecovered(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    //Are doing stuff with the data here. So. Getting Global Vax data.
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    console.log(newDeaths);
+    console.log(totalDeaths);
+    console.log(newRecovered);
+    // calling the displayCovidGlobal function
+    displayTotalRecovered(newRecovered);
+    // displayCovidGlobal(newConfirmed);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+
+ // displaying covid data
+function displayTotalRecovered(totalGlobalRecovered) {
+var covidTotalRecovered = document.querySelector('#get-global-recovery-data');
+// var covidNewConfirmed = document.querySelector('#get-new-covid-data');
+// covidNewConfirmed.append(confirmedCases);
+covidTotalRecovered.append(totalGlobalRecovered);
+}
+
+getTotalRecovered();
+
+
 
  //would like to offload the GEOIP stuff called at the beginning of init here but having some syntax problems
 function getGeoIP(){
