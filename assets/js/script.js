@@ -48,11 +48,6 @@ function getCovidGlobal(){
   })
   .then(function (data) {
     console.log(data);
-    // created variables for the array of data in the global Covid object
-    newConfirmed = data.Global.NewConfirmed;
-    newDeaths = data.Global.NewDeaths;
-    totalDeaths = data.Global.TotalDeaths;
-    newRecovered = data.Global.NewRecovered;
     globalConfirmedCovid = data.Global.TotalConfirmed;
     console.log(globalConfirmedCovid);
     // calling the displayCovidGlobal function
@@ -80,11 +75,6 @@ function getNewConfirmed(){
   .then(function (data) {
     console.log(data);
     newConfirmed = data.Global.NewConfirmed;
-    newDeaths = data.Global.NewDeaths;
-    totalDeaths = data.Global.TotalDeaths;
-    newRecovered = data.Global.NewRecovered;
-    globalConfirmedCovid = data.Global.TotalConfirmed;
-    console.log(globalConfirmedCovid);
     console.log(newConfirmed);
     // calling the displayNewConfimed function
     displayNewConfirmed(newConfirmed);
@@ -110,13 +100,7 @@ function getNewDeaths(){
   })
   .then(function (data) {
     console.log(data);
-    newConfirmed = data.Global.NewConfirmed;
     newDeaths = data.Global.NewDeaths;
-    totalDeaths = data.Global.TotalDeaths;
-    newRecovered = data.Global.NewRecovered;
-    globalConfirmedCovid = data.Global.TotalConfirmed;
-    console.log(globalConfirmedCovid);
-    console.log(newConfirmed);
     console.log(newDeaths);
     // calling the displayNewDeaths function
     displayNewDeaths(newDeaths);
@@ -142,14 +126,7 @@ function getTotalDeaths(){
   })
   .then(function (data) {
     console.log(data);
-    newConfirmed = data.Global.NewConfirmed;
-    newDeaths = data.Global.NewDeaths;
     totalDeaths = data.Global.TotalDeaths;
-    newRecovered = data.Global.NewRecovered;
-    globalConfirmedCovid = data.Global.TotalConfirmed;
-    console.log(globalConfirmedCovid);
-    console.log(newConfirmed);
-    console.log(newDeaths);
     console.log(totalDeaths);
     // calling the displayTotalDeaths function
     displayTotalDeaths(totalDeaths);
@@ -175,15 +152,7 @@ function getTotalRecovered(){
   })
   .then(function (data) {
     console.log(data);
-    newConfirmed = data.Global.NewConfirmed;
-    newDeaths = data.Global.NewDeaths;
-    totalDeaths = data.Global.TotalDeaths;
     newRecovered = data.Global.NewRecovered;
-    globalConfirmedCovid = data.Global.TotalConfirmed;
-    console.log(globalConfirmedCovid);
-    console.log(newConfirmed);
-    console.log(newDeaths);
-    console.log(totalDeaths);
     console.log(newRecovered);
     // calling the displayTotalRecovered function
     displayTotalRecovered(newRecovered);
