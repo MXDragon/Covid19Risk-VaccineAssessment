@@ -40,7 +40,7 @@ function getVaccineData(){
   });
 }
 
-// displays global Covid cases
+// gets global Covid cases
 function getCovidGlobal(){
   fetch(requestUrl)
   .then(function (response) {
