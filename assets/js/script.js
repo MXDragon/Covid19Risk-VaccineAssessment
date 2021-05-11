@@ -39,13 +39,21 @@ function getCovidGlobal(){
    console.log(data);
    
    //Are doing stuff with the data here. So. Getting Global Vax data.
-   globalConfirmedCovid = data.TotalConfirmed;
+   globalConfirmedCovid = data.Global.TotalConfirmed;
    console.log(globalConfirmedCovid);
- 
+  
+   // calling the displayCovidGlobal function
+   displayCovidGlobal(globalConfirmedCovid);
   })
  .catch(function (err) {
    console.log('error: ' + err);
  });
+ }
+
+ // displaying covid data
+ function displayCovidGlobal(confirmedCases) {
+  var covidGlobalConfirmed1 = document.querySelector('#get-covid-data');
+  covidGlobalConfirmed1.append(confirmedCases);
  }
 
  getCovidGlobal();
