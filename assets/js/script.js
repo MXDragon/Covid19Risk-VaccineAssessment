@@ -39,49 +39,28 @@ function getCovidGlobal(){
    console.log(data);
    
    //Are doing stuff with the data here. So. Getting Global Vax data.
-   globalConfirmedCovid = data.TotalConfirmed;
+   globalConfirmedCovid = data.Global.TotalConfirmed;
    console.log(globalConfirmedCovid);
- 
+  
+   // calling the displayCovidGlobal function
+   displayCovidGlobal(globalConfirmedCovid);
   })
  .catch(function (err) {
    console.log('error: ' + err);
  });
  }
 
+ // displaying covid data
+ function displayCovidGlobal(confirmedCases) {
+  var covidGlobalConfirmed1 = document.querySelector('#get-covid-data');
+  covidGlobalConfirmed1.append(confirmedCases);
+ }
+
  getCovidGlobal();
-
-// displays data from Covid-19 API in console
-// function globalCovidData () {
-  // fetch(requestUrl)
-  // .then(function (response) {
-  //   return response.json();
-  // })
-  // .then(function (data) {
-    // console.log('Fetch Response \n-------------');
-  //   console.log(data);
-  //   appendData(data);
-  // })
-  // .catch(function (err) {
-  //   console.log('error: ' + err);
-  // });
-
-// globalCovidData = document.querySelector('#get-covid-data');
-
-  // function appendData(data) {
-    // covidGlobalConfirmed = document.querySelector('#get-covid-data');
-    // for (var i = 0; i < data.length; i++) {
-    //   var div = document.createElement("div");
-    //   div.innerHTML = data[i].totalConfirmed + ' '
-    //   covidData.appendChild(div);
-    // }
-  
-
-
 
 function getGeoIP(){
   
 }
-
 
 function covidData(){
   // displays data from Covid-19 API in console
