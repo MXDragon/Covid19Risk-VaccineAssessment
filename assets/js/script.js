@@ -43,7 +43,7 @@ function getCovidGlobal(){
    console.log(globalConfirmedCovid);
   
    // calling the displayCovidGlobal function
-   displayCovidGlobal(globalConfirmedCovid);
+   displayCovidGlobal(globalConfirmedCovid.toLocaleString());
   })
  .catch(function (err) {
    console.log('error: ' + err);
