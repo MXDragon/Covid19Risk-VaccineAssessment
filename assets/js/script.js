@@ -191,7 +191,7 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     country4Vax = data.country_name;
     setRegionInfo();
     console.log("country4vax: " + country4Vax);
-
+    getCovidGlobal();
     //Getting Covid Data for country
     var TEMPCountryName = data.country_name;
     //Converting country name so Covid will accept it, replace spaces with dashes and lower case
