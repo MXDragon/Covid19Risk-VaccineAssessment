@@ -1,9 +1,6 @@
 var timeDisplayEl = $('#time-display');
-// var covidData = document.querySelector('span');
 var requestUrl = 'https://api.covid19api.com/summary';
-// var currentVaccineDistributedEl = $('#currentVaccineDistributed');
 var searchFormEl = document.querySelector('#search-form');
-
 var submitFormEl = document.querySelector('#submit-form');
 var country4Vax = "";
 var globalIP ="";
@@ -20,6 +17,24 @@ var newRecovered = ""
 var regionActive = ""
 var regionConfirmed = ""
 var regionDeaths =""
+
+//Information from GeoIP
+var countryCodeEl = document.querySelector('#country-code');
+var continent_nameEl = document.querySelector('#continent-name');
+var postalCodeEl = document.querySelector('#postal-code');
+var regionEl = document.querySelector('#region');
+var regionCodeEl = document.querySelector('#region-code');
+
+//Information from Global Covid Data
+var newConfirmedEl = document.querySelector('#new-confirmed');
+var newDeathsEl = document.querySelector('#new-deaths');
+var totalDeathsEl = document.querySelector('#total-deaths');
+var newRecoveredEl = document.querySelector('#new-recovered');
+
+//Information from Regional Covid Data
+var regionActiveEl = document.querySelector('#region-active');
+var regionConfirmedEl = document.querySelector('#region-confirmed');
+var regionDeathsEl = document.querySelector('#region-deaths');
 
 
 //Was working, now not working for some reason, believe the site changed
@@ -40,7 +55,17 @@ function getVaccineData(){
   });
 }
 
+//Just sets the info on the webpage
+function setCovidGlobalData(){
+  newConfirmedEl.append(newConfirmed);
+  newDeathsEl.append(newDeaths);
+  totalDeathsEl.append(totalDeaths);
+  newRecoveredEl.append(newRecovered);
+}
+
+//Gets Global Covid information
 function getCovidGlobal(){
+  //requestURL is defined in a variable up top
   fetch(requestUrl)
   .then(function (response) {
     return response.json();
@@ -49,10 +74,14 @@ function getCovidGlobal(){
     // console.log('Fetch Response \n-------------');
     console.log(data);
     //Are doing stuff with the data here. So. Getting Global Vax data.
-    newConfirmed = data.Global.NewConfirmed;
-    newDeaths = data.Global.NewDeaths;
-    totalDeaths = data.Global.TotalDeaths;
+    newConfirmed = data.Global.NewConfirmed;    
+    newDeaths = data.Global.NewDeaths;    
+    totalDeaths = data.Global.TotalDeaths;    
     newRecovered = data.Global.NewRecovered;
+
+    //Just offloading the set to helper class so we could use it elsewhere
+    setCovidGlobalData();
+    
     globalConfirmedCovid = data.Global.TotalConfirmed;
     console.log(globalConfirmedCovid);
     // calling the displayCovidGlobal function
@@ -69,12 +98,8 @@ var covidGlobalConfirmed1 = document.querySelector('#get-covid-data');
 covidGlobalConfirmed1.append(confirmedCases);
 }
 
-getCovidGlobal();
-
  //would like to offload the GEOIP stuff called at the beginning of init here but having some syntax problems
-function getGeoIP(){
-  
-}
+
 
 function covidData(){
   // displays data from Covid-19 API in console
@@ -82,8 +107,6 @@ function covidData(){
 //'https://api.covid19api.com/total/dayone/country/' + globalCountry + '/status/confirmed'
 //'https://api.covid19api.com/live/country/' + globalCountry + '/status/confirmed'
 //
-
-
   fetch('https://api.covid19api.com/live/country/' + globalCountry + '/status/confirmed')
     .then(function (response) {
       return response.json();
@@ -127,25 +150,25 @@ function displayTime() {
   // momentjs.com 
   var rightNow = moment().format('MMM DD, YYYY [at] hh:mm:ss a');
   timeDisplayEl.text(rightNow);
-
-// <<<<<<< Map_Feature_cont
 //helper class for displayTime
-setInterval(displayTime, 1000);
-
-//logic we call when we load the page. We can use logic calls elsewhere like buttons and dropdowns.
-// =======
+  setInterval(displayTime, 1000);
 }
 
 setInterval(displayTime, 1000);
 
 
 
-// >>>>>>> main
+
 function init() {
-
 //var getIP=  fetch(" https://www.cloudflare.com/cdn-cgi/trace").then(res => res.text()).then(data => console.log(data))
-
-
+//We can use this set function incase we get updated information some other way, like a search bar or drop down
+function setRegionInfo(){
+  countryCodeEl.append(countryCode);
+  continent_nameEl.append(continent_name);
+  postalCodeEl.append(postalCode);
+  regionEl.append(region);
+  regionCodeEl.append(regionCode);
+}
 
 function json(url) {
 return fetch(url).then(res => res.json());
@@ -166,14 +189,12 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     regionCode = data.region_code;
     //will use country4Vax in the Vaccine call
     country4Vax = data.country_name;
+    setRegionInfo();
     console.log("country4vax: " + country4Vax);
 
     //Getting Covid Data for country
-    //Converting country name so Covid will accept it, replace spaces with dashes and lower case
     var TEMPCountryName = data.country_name;
-    
-    
-
+    //Converting country name so Covid will accept it, replace spaces with dashes and lower case
     TEMPCountryName = TEMPCountryName.replace(/\s+/g, '-');
     globalCountry = TEMPCountryName.toLowerCase();
     console.log("globalCountry: " + globalCountry);
@@ -193,17 +214,4 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     return;
 };
 
-
-
 init();
-
-  
-
-  // }}
-  
-
-
-
-
-// document.querySelector("#search-form").addEventListener("submit", function(event) {
-// event.preventDefault();
