@@ -42,7 +42,7 @@
   * [Cody Schenk]()
 - Resources:
   * 📖 [API Resources](https://coding-boot-camp.github.io/full-stack/apis/api-resources)
-  * [Global Covid-19 API](https://api.covid19api.com/summary)
+  * [Global Covid-19 API](https://documenter.getpostman.com/view/10808728/SzS8rjbc#27454960-ea1c-4b91-a0b6-0468bb4e6712)
   * [Covid-19 Vaccines Distributed per Country/Region/City API](https://covid-api.mmediagroup.fr/v1/vaccines?country=)
   * [Confirmed Covid-19 Cases per Country](https://api.covid19api.com/live/country/status/confirmed)
   * [Geo-Location API](https://api.ipdata.co?api-key=${apiKey})
