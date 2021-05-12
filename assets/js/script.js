@@ -56,6 +56,152 @@ function getVaccineData(){
 }
 
 function getCovidGlobal(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    // created variables for the array of data in the global Covid object
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    // calling the displayCovidGlobal function
+    displayCovidGlobal(globalConfirmedCovid);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+ // displaying covid data
+function displayCovidGlobal(confirmedCases) {
+var covidGlobalConfirmed1 = document.querySelector('#get-covid-data');
+covidGlobalConfirmed1.append(confirmedCases);
+}
+getCovidGlobal();
+// gets the New Confirmed cases
+function getNewConfirmed(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    // calling the displayNewConfimed function
+    displayNewConfirmed(newConfirmed);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+ // displaying new confirmed cases
+function displayNewConfirmed(newConfirmedCases) {
+var covidNewConfirmed = document.querySelector('#get-new-covid-data');
+covidNewConfirmed.append(newConfirmedCases);
+}
+getNewConfirmed();
+// getting data on new covid deaths
+function getNewDeaths(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    console.log(newDeaths);
+    // calling the displayNewDeaths function
+    displayNewDeaths(newDeaths);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+ // displaying new covid death data
+function displayNewDeaths(newConfirmedDeaths) {
+var covidNewDeaths = document.querySelector('#get-covid-death-data');
+covidNewDeaths.append(newConfirmedDeaths);
+}
+getNewDeaths();
+// getting total global covid death data
+function getTotalDeaths(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    console.log(newDeaths);
+    console.log(totalDeaths);
+    // calling the displayTotalDeaths function
+    displayTotalDeaths(totalDeaths);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+ // displaying total global covid death data
+function displayTotalDeaths(totalGlobalDeaths) {
+var covidTotalDeaths = document.querySelector('#get-global-death-data');
+covidTotalDeaths.append(totalGlobalDeaths);
+}
+getTotalDeaths();
+// getting total recovered from covid data
+function getTotalRecovered(){
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+    newRecovered = data.Global.NewRecovered;
+    globalConfirmedCovid = data.Global.TotalConfirmed;
+    console.log(globalConfirmedCovid);
+    console.log(newConfirmed);
+    console.log(newDeaths);
+    console.log(totalDeaths);
+    console.log(newRecovered);
+    // calling the displayTotalRecovered function
+    displayTotalRecovered(newRecovered);
+  })
+  .catch(function (err) {
+    console.log('error: ' + err);
+  });
+}
+ // displaying total recovered from covid
+function displayTotalRecovered(totalGlobalRecovered) {
+var covidTotalRecovered = document.querySelector('#get-global-recovery-data');
+covidTotalRecovered.append(totalGlobalRecovered);
+}
+getTotalRecovered();
+
+function getCovidGlobal(){
   //requestURL is defined in a variable up top
   fetch(requestUrl)
   .then(function (response) {
