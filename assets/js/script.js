@@ -74,6 +74,7 @@ function getCovidGlobal(){
     totalDeaths = data.Global.TotalDeaths;
     newRecovered = data.Global.NewRecovered;
     globalConfirmedCovid = data.Global.TotalConfirmed;
+    setCovidGlobalData();
     console.log(globalConfirmedCovid);
     // calling the displayCovidGlobal function
     displayCovidGlobal(globalConfirmedCovid);
