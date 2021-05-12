@@ -54,6 +54,12 @@ function getVaccineData(){
   console.log('error: ' + err);
   });
 }
+function setCovidGlobalData(){
+  newConfirmedEl.append(newConfirmed);
+  newDeathsEl.append(newDeaths);
+  newRecoveredEl.append(newRecovered);
+  totalDeathsEl.append(totalDeaths);
+}
 
 function getCovidGlobal(){
   //requestURL is defined in a variable up top
@@ -64,14 +70,20 @@ function getCovidGlobal(){
   .then(function (data) {
     console.log(data);
     newRecovered = data.Global.NewRecovered;
+    newConfirmed = data.Global.NewConfirmed;
+    newDeaths = data.Global.NewDeaths;
+    totalDeaths = data.Global.TotalDeaths;
+
 
     //Just offloading the set to helper class so we could use it elsewhere
-    setCovidGlobalData();
+    
     
     globalConfirmedCovid = data.Global.TotalConfirmed;
     console.log(globalConfirmedCovid);
+    setCovidGlobalData();
     // calling the displayCovidGlobal function
     displayCovidGlobal(globalConfirmedCovid);
+    
   })
   .catch(function (err) {
     console.log('error: ' + err);
