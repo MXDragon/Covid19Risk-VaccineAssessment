@@ -55,15 +55,6 @@ function getVaccineData(){
   });
 }
 
-//Just sets the info on the webpage
-function setCovidGlobalData(){
-  newConfirmedEl.append(newConfirmed);
-  newDeathsEl.append(newDeaths);
-  totalDeathsEl.append(totalDeaths);
-  newRecoveredEl.append(newRecovered);
-}
-
-//Gets Global Covid information
 function getCovidGlobal(){
   //requestURL is defined in a variable up top
   fetch(requestUrl)
@@ -71,12 +62,7 @@ function getCovidGlobal(){
     return response.json();
   })
   .then(function (data) {
-    // console.log('Fetch Response \n-------------');
     console.log(data);
-    //Are doing stuff with the data here. So. Getting Global Vax data.
-    newConfirmed = data.Global.NewConfirmed;    
-    newDeaths = data.Global.NewDeaths;    
-    totalDeaths = data.Global.TotalDeaths;    
     newRecovered = data.Global.NewRecovered;
 
     //Just offloading the set to helper class so we could use it elsewhere
@@ -97,7 +83,6 @@ function displayCovidGlobal(confirmedCases) {
 var covidGlobalConfirmed1 = document.querySelector('#get-covid-data');
 covidGlobalConfirmed1.append(confirmedCases);
 }
-
  //would like to offload the GEOIP stuff called at the beginning of init here but having some syntax problems
 
 
