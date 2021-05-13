@@ -69,19 +69,54 @@ function getCovidGlobal(){
   .then(function (data) {
     console.log(data);
     // created variables for the array of data in the global Covid object
-    newConfirmed = data.Global.NewConfirmed;
-    newDeaths = data.Global.NewDeaths;
-    totalDeaths = data.Global.TotalDeaths;
-    newRecovered = data.Global.NewRecovered;
-    globalConfirmedCovid = data.Global.TotalConfirmed;
-    setCovidGlobalData();
+    newConfirmed = data.Global.NewConfirmed.toLocaleString();
+    newDeaths = data.Global.NewDeaths.toLocaleString();
+    totalDeaths = data.Global.TotalDeaths.toLocaleString();
+    newRecovered = data.Global.NewRecovered.toLocaleString();
+    globalConfirmedCovid = data.Global.TotalConfirmed
+    //globalConfirmedCovid = TEMPglobalConfirmedCovid.toLocaleString();
+
+    
     console.log(globalConfirmedCovid);
     // calling the displayCovidGlobal function
     displayCovidGlobal(globalConfirmedCovid.toLocaleString());
+// newConfirmed = parseInt(newConfirmed)
+// console.log("New confirmed: " + newConfirmed);
+
+    // displayNewConfirmed(newConfirmed.toLocaleString());
+    // displayNewDeaths(newDeaths.toLocaleString());
+    // displayTotalDeaths(totalDeaths.toLocaleString());
+    // displayNewRecovered(newRecovered.toLocaleString());
+
+
+    setCovidGlobalData();
   })
   .catch(function (err) {
     console.log('error: ' + err);
   });
+}
+
+function displayNewConfirmed(confirmedCases) {
+var covidGlobalConfirmed1 = document.querySelector('#get-new-confirmed');
+covidGlobalConfirmed1.append(confirmedCases);
+}
+
+function displayNewDeaths(confirmedCases) {
+var covidGlobalConfirmed1 = document.querySelector('#get-new-deaths');
+covidGlobalConfirmed1.append(confirmedCases);
+}
+function displayTotalDeaths(confirmedCases) {
+var covidGlobalConfirmed1 = document.querySelector('#get-total-deaths');
+covidGlobalConfirmed1.append(confirmedCases);
+}
+
+function displayTotalRecovered(confirmedCases) {
+var covidGlobalConfirmed1 = document.querySelector('#get-total-recovered');
+covidGlobalConfirmed1.append(confirmedCases);
+}
+
+function displayRestOfGlobal(){
+
 }
  // displaying covid data
 function displayCovidGlobal(confirmedCases) {
