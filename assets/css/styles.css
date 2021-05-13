@@ -6,10 +6,17 @@ h1 {
 	margin: 20px;
 }
 h2 {
-	text-align: left;
+	text-align: right;
 	font-weight: bold;
 	padding: 20px;
 	font-size: large;
+	
+
+}
+#time-display {
+	background-color: rgba(169, 169, 169, 0.281);
+	color: whitesmoke;
+	outline: thin;
 }
 .header-custom {
 	background-image: url('../images/covid1.png');
@@ -19,6 +26,13 @@ h2 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	opacity: 100%;
+}
+.table-custom {
+	margin: auto;
+	background-color: rgba(169, 169, 169, 0.281);
+	font-weight: bolder;
+	color: white;
+	font-size: 24px;
 }
 #search-form {
 	margin-top: 30px;

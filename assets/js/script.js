@@ -56,7 +56,7 @@ function getCovidGlobal(){
     globalConfirmedCovid = data.Global.TotalConfirmed;
     console.log(globalConfirmedCovid);
     // calling the displayCovidGlobal function
-    displayCovidGlobal(globalConfirmedCovid);
+    displayCovidGlobal(globalConfirmedCovid.toLocaleString());
   })
   .catch(function (err) {
     console.log('error: ' + err);
@@ -87,7 +87,7 @@ function getNewConfirmed(){
     console.log(globalConfirmedCovid);
     console.log(newConfirmed);
     // calling the displayNewConfimed function
-    displayNewConfirmed(newConfirmed);
+    displayNewConfirmed(newConfirmed.toLocaleString());
   })
   .catch(function (err) {
     console.log('error: ' + err);
@@ -119,7 +119,7 @@ function getNewDeaths(){
     console.log(newConfirmed);
     console.log(newDeaths);
     // calling the displayNewDeaths function
-    displayNewDeaths(newDeaths);
+    displayNewDeaths(newDeaths.toLocaleString());
   })
   .catch(function (err) {
     console.log('error: ' + err);
@@ -152,7 +152,7 @@ function getTotalDeaths(){
     console.log(newDeaths);
     console.log(totalDeaths);
     // calling the displayTotalDeaths function
-    displayTotalDeaths(totalDeaths);
+    displayTotalDeaths(totalDeaths.toLocaleString());
   })
   .catch(function (err) {
     console.log('error: ' + err);
@@ -186,7 +186,7 @@ function getTotalRecovered(){
     console.log(totalDeaths);
     console.log(newRecovered);
     // calling the displayTotalRecovered function
-    displayTotalRecovered(newRecovered);
+    displayTotalRecovered(newRecovered.toLocaleString());
   })
   .catch(function (err) {
     console.log('error: ' + err);
