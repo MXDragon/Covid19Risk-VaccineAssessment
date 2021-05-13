@@ -372,7 +372,7 @@ covidGlobalConfirmed1.append(confirmedCases);
 // var covidGlobalConfirmed1 = document.querySelector('#get-covid-data');
 // covidGlobalConfirmed1.append(confirmedCases);
 // >>>>>>> main
-}
+
  //would like to offload the GEOIP stuff called at the beginning of init here but having some syntax problems
 
 
