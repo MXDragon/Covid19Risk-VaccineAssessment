@@ -5,6 +5,7 @@ var start = ""
 var end = [0,0]; 
 var map = ""
 var geoson = ""
+var target = ""
 
 function geoIP(){
     function json(url) {
@@ -18,8 +19,10 @@ function geoIP(){
             //getting Lat and Long for Map
             userLatitude = data.latitude.toFixed(2);
             userLongitude = data.longitude.toFixed(2);
-            start = [userLatitude, userLongitude];
+            start = [userLongitude, userLatitude];
+            end = [userLongitude, userLatitude];
             createMap();
+            target = []
             flyMap();
             createMarker();
             
@@ -38,7 +41,7 @@ function flyMap(){
  
     // and now we're at the opposite point
     isAtStart = !isAtStart;
-    console.log("Lat and Lon Target is: " + target);
+    console.log("Lon and Lat Target is: " + target);
     console.log("start is : " + start);
     console.log("end is: " + end );
 
@@ -74,7 +77,7 @@ function createMap(){
     map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10',
-    center: end,
+    center: [userLongitude, userLatitude],
     });
     geojson = {
         'type': 'FeatureCollection',
