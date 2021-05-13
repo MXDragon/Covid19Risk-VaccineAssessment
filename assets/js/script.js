@@ -426,16 +426,23 @@ function covidData(){
       console.log(data);
       
       //must do some logic to get the right region
-      for ( i = data.length ; i < data.length ; i--){
+      console.log("data length: " + data.length);
+      for ( i = (data.length - 1 ) ; i > 0 ; i--){
+        console.log("For Loop Check");
         if (data[i].Province === region){
+          console.log("Region is :" +  region)
           regionActive = data[i].Active;
           regionConfirmed = data[i].Confirmed;
           regionDeaths = data[i].Deaths;
+          regionActiveEl.append(regionActive);
+          regionConfirmedEl.append(regionConfirmed);
+          regionDeathsEl.append(regionDeaths);
           console.log("Region Deaths: " + regionDeaths)
           console.log("Region Active: " + regionActive)
           console.log("Region Confirmed : " + regionConfirmed)
           return;
         }
+        
       }
 
       console.log(data[0].Confirmed);
@@ -496,6 +503,7 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     continent_name = data.continent_name;
     postalCode = data.postal;
     region = data.region;
+    console.log("Region is: " + region);
     regionCode = data.region_code;
     //will use country4Vax in the Vaccine call
     country4Vax = data.country_name;
