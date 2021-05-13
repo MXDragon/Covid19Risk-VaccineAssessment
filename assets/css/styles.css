@@ -10,8 +10,10 @@ h2 {
 	font-weight: bold;
 	padding: 20px;
 	font-size: large;
-	
+}
 
+div h2 {
+	text-align: center;
 }
 #time-display {
 	background-color: rgba(169, 169, 169, 0.281);
