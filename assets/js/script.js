@@ -2,6 +2,7 @@ var timeDisplayEl = $('#time-display');
 var requestUrl = 'https://api.covid19api.com/summary';
 var searchFormEl = document.querySelector('#search-form');
 var submitFormEl = document.querySelector('#submit-form');
+var regionalEl = document.querySelector('#regional');
 var country4Vax = "";
 var globalIP ="";
 var globalConfirmedVax =""
@@ -25,6 +26,7 @@ var end = [0,0];
 var map = ""
 var geoson = ""
 var target = ""
+var repoList = document.querySelector('ul');
 
 //Information from GeoIP
 var countryCodeEl = document.querySelector('#country-code');
@@ -47,6 +49,7 @@ var regionDeathsEl = document.querySelector('#region-deaths');
 
 //Was working, now not working for some reason, believe the site changed
 function getVaccineData(){
+  console.log(country4Vax);
   fetch( 'https://covid-api.mmediagroup.fr/v1/vaccines?country=' + country4Vax )
   .then(function (response) {
   return response.json();
@@ -430,29 +433,76 @@ function covidData(){
       return response.json();
     })
     .then(function (data) {
-      // console.log('Fetch Response \n-------------');
-      console.log(data);
-      
-      //must do some logic to get the right region
-      console.log("data length: " + data.length);
-      for ( i = (data.length - 1 ) ; i > 0 ; i--){
-        console.log("For Loop Check");
-        if (data[i].Province === region){
-          console.log("Region is :" +  region)
-          regionActive = data[i].Active;
-          regionConfirmed = data[i].Confirmed;
-          regionDeaths = data[i].Deaths;
-          regionActiveEl.append(regionActive);
-          regionConfirmedEl.append(regionConfirmed);
-          regionDeathsEl.append(regionDeaths);
-          console.log("Region Deaths: " + regionDeaths)
-          console.log("Region Active: " + regionActive)
-          console.log("Region Confirmed : " + regionConfirmed)
-          return;
-        }
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    
+    //must do some logic to get the right region
+    console.log("data length: " + data.length);
+
+    for ( i = (data.length - 1 ) ; i > 0 ; i--){
+
+      console.log("For Loop Check");
+
+      if (data[i].Province === region){
         
+        console.log("Region is : " +  region)
+        regionActive = data[i].Active;
+        regionConfirmed = data[i].Confirmed;
+        regionDeaths = data[i].Deaths;
+        regionActiveEl.append(regionActive);
+        regionConfirmedEl.append(regionConfirmed);
+        regionDeathsEl.append(regionDeaths);
+        console.log("Region Deaths: " + regionDeaths);
+        console.log("Region Active: " + regionActive);
+        console.log("Region Confirmed : " + regionConfirmed);
+        return;
+       }
+
+        
+        var TEMPMomentDate = moment().format('l');
+        TEMPMomentDate = TEMPMomentDate.replace(/\//g, '-');
+        var TEMPObjectDate = data[i].Date.substring(0, 10);
+        console.log("TEMP Object Date: " + TEMPObjectDate);
+        var newObjectDate = TEMPObjectDate.split("-");
+        TEMPObjectDate = newObjectDate[1] + "-" + newObjectDate[2] +"-"+ newObjectDate[0];
+        TEMPObjectDate = TEMPObjectDate.substring(1);
+        console.log(TEMPObjectDate);
+        console.log("i is: " + i);
+
+
+        // in this loop we are gethering all regional info for the date
+        if (TEMPObjectDate === TEMPMomentDate){
+          console.log("Region is " + data[i].Province);
+          var newUserLongitude = data[i].Lon;
+          var newUserLatitude = data[i].Lat;
+          var newRegionalProvince = data[i].Province;
+          console.log("newRegion : "+ newRegionalProvince);
+          console.log("userLong: " + newUserLongitude);
+          console.log("userLat: " + newUserLatitude);
+          var listItem = document.createElement('li');
+          listItem.textContent = "Province : " + data[i].Province + " : Deaths : " +data[i].Deaths;
+          repoList.appendChild(listItem);
+
       }
 
+
+    }
+       console.log("We are outside of the for i")
+       console.log["i is: " + i];
+
+
+        console.log("Data.length : " + data.length);
+        //Getting other regions information
+      //   for ( i = (data.length - 1 ) ; i > 0 ; i--){
+      //     //doing some heavy lifting for matching dates on object with moment.js date
+          
+          
+      // }  
+        
+      
+      
+      
+        console.log("Out of Regional Loop")
       console.log(data[0].Confirmed);
       //Are doing stuff with the data here. So.
       var TEMPcovidGlobalConfirmed=data[0].Confirmed;
@@ -604,6 +654,18 @@ function createMap(){
   };
 }
 
+
+    //str = str.replace(/\s+/g, '-');
+    // console.log("Global IP: " +globalIP);
+    // console.log(data.ip);
+    // console.log(data.city);
+    // console.log(data.country_code);
+    
+    // so many more properties
+    getVaccineData();
+    return;
+};
+
 function createMarker(){
   // Add markers to the map.
   geojson.features.forEach(function (marker) {
@@ -626,15 +688,5 @@ function createMarker(){
       .addTo(map);
       });
 }
-    //str = str.replace(/\s+/g, '-');
-    // console.log("Global IP: " +globalIP);
-    // console.log(data.ip);
-    // console.log(data.city);
-    // console.log(data.country_code);
-    
-    // so many more properties
-    getVaccineData();
-    return;
-};
 
 init();
