@@ -13,10 +13,10 @@
 
 <body>
   <header>
-    <section class="hero is-medium header-custom is-primary has-text-black">
+    <section class="hero is-medium header-custom is-primary ">
       <h2> <span id="time-display"></span></h2>
       <div class="hero-body">
-        <table class="table is-centered table-custom"> 
+        <table class="table is-centered table-custom my-6 is-size-3"> 
         <tbody>
         <tr>
           <td>Current Global COVID-19 Cases: <span id="get-covid-data"></span> </td>
@@ -32,15 +32,21 @@
         </tr>
         </tbody>
         </table>
-      <table class="table is-centered table-custom"> 
+      <table class="table is-centered is-bordered is-fullwidth table-custom1 is-size-4 my-6"> 
+        </tbody>
+        <tr>
         <td>Country Code: <span id="country-code"></span></td>
         <td>Continent Name: <span id="continent-name"></span></td>
         <td>Postal Code: <span id="postal-code"></span></td>
         <td>Region: <span id="region"></span></td>
         <td>Region Code: <span id="region-code"></span></td>
+        </tr>
+        <tr>
         <td>Region Active: <span id="region-active"></span></td>
         <td>Region Confirmed: <span id="region-confirmed"></span></td>
         <td>Region Deaths: <span id="region-deaths"></span></td>
+        </tr>
+        </tbody>
       </table>
   </header>
   <!-- Created a form element to add #search-form  -->
