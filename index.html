@@ -7,6 +7,8 @@
   <title>Covid 19 Risk-Vaccine Assessment</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
   </head>
 
 <body>
@@ -40,8 +42,6 @@
         <td>Region Code: <span id="region-code"></span></td>
         </tr>
         <tr>
-        <td>Region Active: <span id="region-active"></span></td>
-        <td>Region Confirmed: <span id="region-confirmed"></span></td>
         <td>Region Active: <span id="region-active"></span></td>
         <td>Region Confirmed: <span id="region-confirmed"></span></td>
         <td>Region Deaths: <span id="region-deaths"></span></td>
@@ -255,6 +255,19 @@
       <!-- <button class="btn btn-info button is-fullwidth is-primary  btn-block mt-2">Search</button>
     </div> -->
     </form>
+    <div id='map' class="is-centered" style='width: autol; height: 1080px;'></div>
+    <!-- Table for Regional Data -->
+    <section class="hero is-medium header-custom is-primary has-text-black">
+      <div class="hero-body">
+        <table>
+          <trbody>
+            <ul class="col-8 mb-3 is-centered table-custom"></ul>
+          </trbody>
+        
+        </table>
+       </div>
+
+    </section>
     </div>
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

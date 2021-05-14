@@ -1,50 +1,38 @@
 var mapBox = document.querySelector('#map');
 var userLatitude = "";
 var userLongitude = "";
+var start = ""
+var end = [0,0]; 
+var map = ""
+var geoson = ""
+var target = ""
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmVudHpicnkiLCJhIjoiY2tvZ2o5cm5iMGZrcTJvbngwZnpzYW9yMyJ9.lFzRDHzMnkWAhcUuY-6POw';
-    var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v10',
-    center: end,
-    });
-    var geojson = {
-        'type': 'FeatureCollection',
-        'features': [
-        {
-        'type': 'Feature',
-        'properties': {
-        'message': 'Foo',
-        'iconSize': [60, 60]
-        },
-        'geometry': {
-        'type': 'Point',
-        'coordinates': [userLatitude, userLongitude]
-        }}
-        ]
-    };
-        
-var start = [0,0];
-var end = ""  
-
-function init(){
+function geoIP(){
     function json(url) {
-    return fetch(url).then(res => res.json());
-    }
+        return fetch(url).then(res => res.json());
+        }
+            
+        let apiKey = '9692d1c3f5905c16f6c3847aabe964849cafe1836e79a8d817edcd25';
+        json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+            console.log(data)
         
-    let apiKey = '9692d1c3f5905c16f6c3847aabe964849cafe1836e79a8d817edcd25';
-    json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
-        console.log(data)
-    
-        //getting Lat and Long for Map
-        userLatitude = data.latitude;
-        userLongitude = data.longitude;
-        end = [userLatitude, userLongitude];
-        
-        console.log(userLongitude);
-        console.log(userLatitude);
-    })
-    
+            //getting Lat and Long for Map
+            userLatitude = data.latitude.toFixed(2);
+            userLongitude = data.longitude.toFixed(2);
+            start = [userLongitude, userLatitude];
+            end = [userLongitude, userLatitude];
+            createMap();
+            target = []
+            flyMap();
+            createMarker();
+            
+            console.log("userLong: " + userLongitude);
+            console.log("userLat: " + userLatitude);
+        })
+
+}
+
+function flyMap(){
     var isAtStart = true;
  
     // depending on whether we're currently at point a or b, aim for
@@ -53,7 +41,9 @@ function init(){
  
     // and now we're at the opposite point
     isAtStart = !isAtStart;
-    console.log("Lat and Lon Target is: " + target);
+    console.log("Lon and Lat Target is: " + target);
+    console.log("start is : " + start);
+    console.log("end is: " + end );
 
     map.flyTo({
         // These options control the ending camera position: centered at
@@ -78,29 +68,62 @@ function init(){
         // this animation is considered essential with respect to prefers-reduced-motion
         essential: true
         });
-    
-    };
+}
 
+function createMap(){
+    console.log("CMuserLong: " + userLongitude);
+    console.log("CMuserLat: " + userLatitude);
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYmVudHpicnkiLCJhIjoiY2tvZ2o5cm5iMGZrcTJvbngwZnpzYW9yMyJ9.lFzRDHzMnkWAhcUuY-6POw';
+    map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    center: [userLongitude, userLatitude],
+    });
+    geojson = {
+        'type': 'FeatureCollection',
+        'features': [
+        {
+        'type': 'Feature',
+        'properties': {
+        'message': 'Foo',
+        'iconSize': [60, 60]
+        },
+        'geometry': {
+        'type': 'Point',
+        'coordinates': [userLongitude, userLatitude]
+        }}
+        ]
+    };
+}
+
+function createMarker(){
     // Add markers to the map.
     geojson.features.forEach(function (marker) {
-    // Create a DOM element for each marker.
-    var el = document.createElement('div');
-    el.className = 'marker';
-    el.style.backgroundImage =
-    'url(https://img.icons8.com/emoji/96/000000/biohazard-emoji.png)';
-    el.style.width = marker.properties.iconSize[0] + 'px';
-    el.style.height = marker.properties.iconSize[1] + 'px';
-    el.style.backgroundSize = '100%';
-     
-    el.addEventListener('click', function () {
-    window.alert(marker.properties.message);
-    });
-     
-    // Add markers to the map.
-    new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .addTo(map);
-    });
+        // Create a DOM element for each marker.
+        var el = document.createElement('div');
+        el.className = 'marker';
+        el.style.backgroundImage =
+        'url(https://img.icons8.com/emoji/96/000000/biohazard-emoji.png)';
+        el.style.width = marker.properties.iconSize[0] + 'px';
+        el.style.height = marker.properties.iconSize[1] + 'px';
+        el.style.backgroundSize = '100%';
+         
+        el.addEventListener('click', function () {
+        window.alert(marker.properties.message);
+        });
+         
+        // Add markers to the map.
+        new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+        });
+}
+
+function init(){
+    geoIP();
+   
+};
+
 
 
 init();
