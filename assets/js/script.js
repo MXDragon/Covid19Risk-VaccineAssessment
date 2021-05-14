@@ -438,6 +438,7 @@ function covidData(){
     
     //must do some logic to get the right region
     console.log("data length: " + data.length);
+    var TEMPObjectDate = data[data.length - 1 ].Date ; 
 
     for ( i = (data.length - 1 ) ; i > 0 ; i--){
 
@@ -461,20 +462,21 @@ function covidData(){
 
       }
     
-      var TEMPMomentDate = moment().format('l');
-      TEMPMomentDate = TEMPMomentDate.replace(/\//g, '-');
-      var TEMPObjectDate = data[i].Date.substring(0, 10);
-      console.log("TEMP Object Date: " + TEMPObjectDate);
-      var newObjectDate = TEMPObjectDate.split("-");
-      TEMPObjectDate = newObjectDate[1] + "-" + newObjectDate[2] +"-"+ newObjectDate[0];
-      TEMPObjectDate = TEMPObjectDate.substring(1);
-      console.log("TEMPObjectDate " + TEMPObjectDate);
-      console.log("TEMPMomentDate " + TEMPMomentDate);
-      console.log("i is: " + i);
+      // var TEMPMomentDate = moment().format('l');
+      // TEMPMomentDate = TEMPMomentDate.replace(/\//g, '-');
+          
+      // var TEMPObjectDate = data[i].Date.substring(0, 10);
+      // console.log("TEMP Object Date: " + TEMPObjectDate);
+      // var newObjectDate = TEMPObjectDate.split("-");
+      // TEMPObjectDate = newObjectDate[1] + "-" + newObjectDate[2] +"-"+ newObjectDate[0];
+      // TEMPObjectDate = TEMPObjectDate.substring(1);
+      // console.log("TEMPObjectDate " + TEMPObjectDate);
+      // console.log("TEMPMomentDate " + TEMPMomentDate);
+      // console.log("i is: " + i);
 
 
       // in this loop we are gethering all regional info for the date
-    if (TEMPObjectDate === TEMPMomentDate){
+    if (TEMPObjectDate === data[i].Date){
       console.log("Region is " + data[i].Province);
       var newUserLongitude = data[i].Lon;
       var newUserLatitude = data[i].Lat;
