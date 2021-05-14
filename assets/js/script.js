@@ -455,53 +455,47 @@ function covidData(){
         console.log("Region Deaths: " + regionDeaths);
         console.log("Region Active: " + regionActive);
         console.log("Region Confirmed : " + regionConfirmed);
+
+
         return;
-       }
-
-        
-        var TEMPMomentDate = moment().format('l');
-        TEMPMomentDate = TEMPMomentDate.replace(/\//g, '-');
-        var TEMPObjectDate = data[i].Date.substring(0, 10);
-        console.log("TEMP Object Date: " + TEMPObjectDate);
-        var newObjectDate = TEMPObjectDate.split("-");
-        TEMPObjectDate = newObjectDate[1] + "-" + newObjectDate[2] +"-"+ newObjectDate[0];
-        TEMPObjectDate = TEMPObjectDate.substring(1);
-        console.log(TEMPObjectDate);
-        console.log("i is: " + i);
-
-
-        // in this loop we are gethering all regional info for the date
-        if (TEMPObjectDate === TEMPMomentDate){
-          console.log("Region is " + data[i].Province);
-          var newUserLongitude = data[i].Lon;
-          var newUserLatitude = data[i].Lat;
-          var newRegionalProvince = data[i].Province;
-          console.log("newRegion : "+ newRegionalProvince);
-          console.log("userLong: " + newUserLongitude);
-          console.log("userLat: " + newUserLatitude);
-          var listItem = document.createElement('li');
-          listItem.textContent = "Province : " + data[i].Province + " : Deaths : " +data[i].Deaths;
-          repoList.appendChild(listItem);
 
       }
+    
+      var TEMPMomentDate = moment().format('l');
+      TEMPMomentDate = TEMPMomentDate.replace(/\//g, '-');
+      var TEMPObjectDate = data[i].Date.substring(0, 10);
+      console.log("TEMP Object Date: " + TEMPObjectDate);
+      var newObjectDate = TEMPObjectDate.split("-");
+      TEMPObjectDate = newObjectDate[1] + "-" + newObjectDate[2] +"-"+ newObjectDate[0];
+      TEMPObjectDate = TEMPObjectDate.substring(1);
+      console.log("TEMPObjectDate " + TEMPObjectDate);
+      console.log("TEMPMomentDate " + TEMPMomentDate);
+      console.log("i is: " + i);
 
 
+      // in this loop we are gethering all regional info for the date
+    if (TEMPObjectDate === TEMPMomentDate){
+      console.log("Region is " + data[i].Province);
+      var newUserLongitude = data[i].Lon;
+      var newUserLatitude = data[i].Lat;
+      var newRegionalProvince = data[i].Province;
+      console.log("newRegion : "+ newRegionalProvince);
+      console.log("userLong: " + newUserLongitude);
+      console.log("userLat: " + newUserLatitude);
+      var listItem = document.createElement('li');
+      listItem.textContent = "Province : " + data[i].Province + " : Deaths : " +data[i].Deaths;
+      repoList.appendChild(listItem);
+      
     }
+      
+    }
+    
        console.log("We are outside of the for i")
        console.log["i is: " + i];
 
 
         console.log("Data.length : " + data.length);
-        //Getting other regions information
-      //   for ( i = (data.length - 1 ) ; i > 0 ; i--){
-      //     //doing some heavy lifting for matching dates on object with moment.js date
-          
-          
-      // }  
-        
-      
-      
-      
+  
         console.log("Out of Regional Loop")
       console.log(data[0].Confirmed);
       //Are doing stuff with the data here. So.
