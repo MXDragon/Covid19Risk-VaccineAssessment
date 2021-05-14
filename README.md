@@ -31,9 +31,12 @@
 
 - Deployed Website - ""
 
-- [Include screenshots here!]()
+![Global and Regional Covid Data](assets/images/Global-Regional-Covid.png)
+
+![Global and Regional Covid Data](assets/images/Covid-Geo-Map.png)
 
 ## Credits
+
 - Collaborators:
   * [Bryan Bentz](https://github.com/MXDragon) 
   * [Diana Daghlas](https://github.com/ddaghlas)
