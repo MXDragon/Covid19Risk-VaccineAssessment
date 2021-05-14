@@ -2,6 +2,7 @@ var timeDisplayEl = $('#time-display');
 var requestUrl = 'https://api.covid19api.com/summary';
 var searchFormEl = document.querySelector('#search-form');
 var submitFormEl = document.querySelector('#submit-form');
+var regionalEl = document.querySelector('#regional');
 var country4Vax = "";
 var globalIP ="";
 var globalConfirmedVax =""
@@ -17,6 +18,15 @@ var newRecovered = ""
 var regionActive = ""
 var regionConfirmed = ""
 var regionDeaths =""
+var mapBox = document.querySelector('#map');
+var userLatitude = "";
+var userLongitude = "";
+var start = ""
+var end = [0,0]; 
+var map = ""
+var geoson = ""
+var target = ""
+var repoList = document.querySelector('ul');
 
 //Information from GeoIP
 var countryCodeEl = document.querySelector('#country-code');
@@ -39,6 +49,7 @@ var regionDeathsEl = document.querySelector('#region-deaths');
 
 //Was working, now not working for some reason, believe the site changed
 function getVaccineData(){
+  console.log(country4Vax);
   fetch( 'https://covid-api.mmediagroup.fr/v1/vaccines?country=' + country4Vax )
   .then(function (response) {
   return response.json();
@@ -422,22 +433,72 @@ function covidData(){
       return response.json();
     })
     .then(function (data) {
-      // console.log('Fetch Response \n-------------');
-      console.log(data);
-      
-      //must do some logic to get the right region
-      for ( i = data.length ; i < data.length ; i--){
-        if (data[i].Province === region){
-          regionActive = data[i].Active;
-          regionConfirmed = data[i].Confirmed;
-          regionDeaths = data[i].Deaths;
-          console.log("Region Deaths: " + regionDeaths)
-          console.log("Region Active: " + regionActive)
-          console.log("Region Confirmed : " + regionConfirmed)
-          return;
-        }
-      }
+    // console.log('Fetch Response \n-------------');
+    console.log(data);
+    
+    //must do some logic to get the right region
+    console.log("data length: " + data.length);
+    var TEMPObjectDate = data[data.length - 1 ].Date ; 
 
+    for ( i = (data.length - 1 ) ; i > 0 ; i--){
+
+      console.log("For Loop Check");
+
+      if (data[i].Province === region){
+        
+        console.log("Region is : " +  region)
+        regionActive = data[i].Active;
+        regionConfirmed = data[i].Confirmed;
+        regionDeaths = data[i].Deaths;
+        regionActiveEl.append(regionActive);
+        regionConfirmedEl.append(regionConfirmed);
+        regionDeathsEl.append(regionDeaths);
+        console.log("Region Deaths: " + regionDeaths);
+        console.log("Region Active: " + regionActive);
+        console.log("Region Confirmed : " + regionConfirmed);
+
+
+        return;
+
+      }
+    
+      // var TEMPMomentDate = moment().format('l');
+      // TEMPMomentDate = TEMPMomentDate.replace(/\//g, '-');
+          
+      // var TEMPObjectDate = data[i].Date.substring(0, 10);
+      // console.log("TEMP Object Date: " + TEMPObjectDate);
+      // var newObjectDate = TEMPObjectDate.split("-");
+      // TEMPObjectDate = newObjectDate[1] + "-" + newObjectDate[2] +"-"+ newObjectDate[0];
+      // TEMPObjectDate = TEMPObjectDate.substring(1);
+      // console.log("TEMPObjectDate " + TEMPObjectDate);
+      // console.log("TEMPMomentDate " + TEMPMomentDate);
+      // console.log("i is: " + i);
+
+
+      // in this loop we are gethering all regional info for the date
+    if (TEMPObjectDate === data[i].Date){
+      console.log("Region is " + data[i].Province);
+      var newUserLongitude = data[i].Lon;
+      var newUserLatitude = data[i].Lat;
+      var newRegionalProvince = data[i].Province;
+      console.log("newRegion : "+ newRegionalProvince);
+      console.log("userLong: " + newUserLongitude);
+      console.log("userLat: " + newUserLatitude);
+      var listItem = document.createElement('li');
+      listItem.textContent = "Province : " + data[i].Province + " : Deaths : " +data[i].Deaths;
+      repoList.appendChild(listItem);
+      
+    }
+      
+    }
+    
+       console.log("We are outside of the for i")
+       console.log["i is: " + i];
+
+
+        console.log("Data.length : " + data.length);
+  
+        console.log("Out of Regional Loop")
       console.log(data[0].Confirmed);
       //Are doing stuff with the data here. So.
       var TEMPcovidGlobalConfirmed=data[0].Confirmed;
@@ -490,12 +551,22 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
 
     globalIP = data.ip
     //getting Lat and Long for Map
-    userLatitude = data.latitude
-    userLongitude = data.longitude
+    userLatitude = data.latitude.toFixed(2);
+            userLongitude = data.longitude.toFixed(2);
+            start = [userLongitude, userLatitude];
+            end = [userLongitude, userLatitude];
+            createMap();
+            target = []
+            flyMap();
+            createMarker();
+            
+            console.log("userLong: " + userLongitude);
+            console.log("userLat: " + userLatitude);
     countryCode = data.country_code;
     continent_name = data.continent_name;
     postalCode = data.postal;
     region = data.region;
+    console.log("Region is: " + region);
     regionCode = data.region_code;
     //will use country4Vax in the Vaccine call
     country4Vax = data.country_name;
@@ -513,6 +584,73 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     covidData();
     return;
   });
+
+  
+function flyMap(){
+  var isAtStart = true;
+
+  // depending on whether we're currently at point a or b, aim for
+  // point a or b
+  var target = isAtStart ? end : start;
+
+  // and now we're at the opposite point
+  isAtStart = !isAtStart;
+  console.log("Lon and Lat Target is: " + target);
+  console.log("start is : " + start);
+  console.log("end is: " + end );
+
+  map.flyTo({
+      // These options control the ending camera position: centered at
+      // the target, at zoom level 9, and north up.
+      
+      center: target,
+      zoom: 9,
+      bearing: 0,
+       
+      // These options control the flight curve, making it move
+      // slowly and zoom out almost completely before starting
+      // to pan.
+      speed: 0.2, // make the flying slow
+      curve: 1, // change the speed at which it zooms out
+       
+      // This can be any easing function: it takes a number between
+      // 0 and 1 and returns another number between 0 and 1.
+      easing: function (t) {
+      return t;
+      },
+       
+      // this animation is considered essential with respect to prefers-reduced-motion
+      essential: true
+      });
+}
+
+function createMap(){
+  console.log("CMuserLong: " + userLongitude);
+  console.log("CMuserLat: " + userLatitude);
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYmVudHpicnkiLCJhIjoiY2tvZ2o5cm5iMGZrcTJvbngwZnpzYW9yMyJ9.lFzRDHzMnkWAhcUuY-6POw';
+  map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/dark-v10',
+  center: [userLongitude, userLatitude],
+  });
+  geojson = {
+      'type': 'FeatureCollection',
+      'features': [
+      {
+      'type': 'Feature',
+      'properties': {
+      'message': 'Foo',
+      'iconSize': [60, 60]
+      },
+      'geometry': {
+      'type': 'Point',
+      'coordinates': [userLongitude, userLatitude]
+      }}
+      ]
+  };
+}
+
+
     //str = str.replace(/\s+/g, '-');
     // console.log("Global IP: " +globalIP);
     // console.log(data.ip);
@@ -523,5 +661,28 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     getVaccineData();
     return;
 };
+
+function createMarker(){
+  // Add markers to the map.
+  geojson.features.forEach(function (marker) {
+      // Create a DOM element for each marker.
+      var el = document.createElement('div');
+      el.className = 'marker';
+      el.style.backgroundImage =
+      'url(https://img.icons8.com/emoji/96/000000/biohazard-emoji.png)';
+      el.style.width = marker.properties.iconSize[0] + 'px';
+      el.style.height = marker.properties.iconSize[1] + 'px';
+      el.style.backgroundSize = '100%';
+       
+      el.addEventListener('click', function () {
+      window.alert(marker.properties.message);
+      });
+       
+      // Add markers to the map.
+      new mapboxgl.Marker(el)
+      .setLngLat(marker.geometry.coordinates)
+      .addTo(map);
+      });
+}
 
 init();
