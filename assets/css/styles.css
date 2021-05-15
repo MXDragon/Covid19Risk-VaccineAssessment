@@ -1,3 +1,6 @@
+* {
+	font-family: 'Raleway', sans-serif;
+}
 p {
 	text-align: center;
 }
@@ -14,6 +17,9 @@ h2 {
 	font-weight: bolder;
 	padding: 20px;
 	font-size: large;
+}
+td {
+	margin-left: auto
 }
 #time-display {
 	background-color: rgba(169, 169, 169, 0.281);
@@ -44,7 +50,9 @@ h2 {
 	color: white;
 	font-size: 22px;
 	font-weight: bold;
-
+}
+.progress-custom {
+	background-color: rgba(169, 169, 169, 0.281);
 }
 #search-form {
 	margin-top: 30px;
@@ -53,4 +61,8 @@ h2 {
 .box {
 	border: 2px solid hsl(171, 100%, 96%);
 	border-radius: 8px;
+}
+#region-deaths, #new-confirmed, #new-deaths, #new-recovered {
+	font-weight: bolder;
+	font-size: larger;
 }
