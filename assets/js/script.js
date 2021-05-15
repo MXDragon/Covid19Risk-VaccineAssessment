@@ -492,7 +492,7 @@ function covidData(){
       console.log("userLat: " + newUserLatitude);
       var listItem = document.createElement('li');
 
-      listItem.textContent = "Province: " + data[i].Province + " Deaths: " +data[i].Deaths + " Active: " + data[i].Active + " Recovered: " + data[i].Recovered ;
+      listItem.textContent = "Province: " + data[i].Province + " Deaths: " +data[i].Deaths.toLocaleString() + " Active: " + data[i].Active.toLocaleString() + " Recovered: " + data[i].Recovered.toLocaleString();
       repoList.append(listItem);
 
       
