@@ -447,9 +447,9 @@ function covidData(){
       if (data[i].Province === region){
         
         console.log("Region is : " +  region)
-        regionActive = data[i].Active;
-        regionConfirmed = data[i].Confirmed;
-        regionDeaths = data[i].Deaths;
+        regionActive = data[i].Active.toLocaleString();
+        regionConfirmed = data[i].Confirmed.toLocaleString();
+        regionDeaths = data[i].Deaths.toLocaleString();
         regionActiveEl.append(regionActive);
         regionConfirmedEl.append(regionConfirmed);
         regionDeathsEl.append(regionDeaths);
@@ -485,7 +485,7 @@ function covidData(){
       console.log("userLong: " + newUserLongitude);
       console.log("userLat: " + newUserLatitude);
       var listItem = document.createElement('li');
-      listItem.textContent = "Province : " + data[i].Province + " : Deaths : " +data[i].Deaths;
+      listItem.textContent = "Province : " + data[i].Province + " : Deaths : " +data[i].Deaths.toLocaleString();
       repoList.appendChild(listItem);
       
     }
