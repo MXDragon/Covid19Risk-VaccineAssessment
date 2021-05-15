@@ -46,19 +46,25 @@ var regionActiveEl = document.querySelector('#region-active');
 var regionConfirmedEl = document.querySelector('#region-confirmed');
 var regionDeathsEl = document.querySelector('#region-deaths');
 
+var vaccineInfoEl = document.querySelector('#currentVaccineDistributed');
+
 
 //Was working, now not working for some reason, believe the site changed
 function getVaccineData(){
   console.log(country4Vax);
-  fetch( 'https://covid-api.mmediagroup.fr/v1/vaccines?country=' + country4Vax )
+  fetch( 'https://covid-api.mmediagroup.fr/v1/vaccines?country=' + country4Vax)
   .then(function (response) {
   return response.json();
   })
   .then(function (data) {
   // console.log('Fetch Response \n-------------');
   console.log(data);
+  globalConfirmedVax = data.World.All.administered.toLocaleString();
+  vaccineInfoEl.append(globalConfirmedVax);
+
+
   //Are doing stuff with the data here. So. Getting Global Vax data.
-  globalConfirmedVax = data.All.administered;
+  
   console.log(globalConfirmedVax);
   })
   .catch(function (err) {
@@ -445,7 +451,7 @@ function covidData(){
       console.log("For Loop Check");
 
       if (data[i].Province === region){
-        
+        localStorage.setItem("The Unique Local Storage item is a Local Region", region);
         console.log("Region is : " +  region)
         regionActive = data[i].Active.toLocaleString();
         regionConfirmed = data[i].Confirmed.toLocaleString();
@@ -485,8 +491,10 @@ function covidData(){
       console.log("userLong: " + newUserLongitude);
       console.log("userLat: " + newUserLatitude);
       var listItem = document.createElement('li');
-      listItem.textContent = "Province : " + data[i].Province + " : Deaths : " +data[i].Deaths.toLocaleString();
-      repoList.appendChild(listItem);
+
+      listItem.textContent = "Province: " + data[i].Province + " Deaths: " +data[i].Deaths + " Active: " + data[i].Active + " Recovered: " + data[i].Recovered ;
+      repoList.append(listItem);
+
       
     }
       
@@ -570,6 +578,7 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     regionCode = data.region_code;
     //will use country4Vax in the Vaccine call
     country4Vax = data.country_name;
+    getVaccineData();
     setRegionInfo();
     console.log("country4vax: " + country4Vax);
     getCovidGlobal();
@@ -658,7 +667,7 @@ function createMap(){
     // console.log(data.country_code);
     
     // so many more properties
-    getVaccineData();
+    
     return;
 };
 
